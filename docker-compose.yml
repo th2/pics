@@ -1,0 +1,15 @@
+services:
+  pics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pics
+    container_name: pics
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./log:/usr/src/app/log
+      - ./cache:/usr/src/app/cache
+    command: node server.js

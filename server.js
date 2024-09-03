@@ -1,10 +1,12 @@
 const express = require('express');
+const cloudflare = require('cloudflare-express');
 const app = express();
 const http = require('http').createServer(app);
 const logger = require('./logger.js');
 const path = require('path');
 const imagedb = require('./imagedb.js');
 
+app.use(cloudflare.restore({update_on_start:true}));
 app.use(logger.visitReq());
 
 app.get('/thumbs/*', (req, res) => {
